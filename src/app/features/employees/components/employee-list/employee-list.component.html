@@ -1,41 +1,114 @@
-<!-- employees-list.component.html -->
+<div class="hero-header">
+  <div class="hero-top">
+    <div class="hero-title">
+      <h1>Gestion des Employés</h1>
+      <div class="subtitle">Tableau de bord</div>
+    </div>
+    <div class="hero-actions">
+      <button class="icon-btn" title="Notifications"
+        (click)="onNotifications()">
+        <span class="material-icons">notifications</span>
+      </button>
+      <button class="icon-btn" title="Exporter" (click)="onExport()">
+        <span class="material-icons">download</span>
+      </button>
+      <div class="profile">
+        <span class="material-icons">account_circle</span>
+        <span class="user-email">{{ 'Utilisateur' }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard-header">
+    <div class="stat-card primary">
+      <div class="stat-title">Employés</div>
+      <div class="stat-value">{{ totalEmployees }}</div>
+    </div>
+    <div class="stat-card accent">
+      <div class="stat-title">Utilisateurs</div>
+      <div class="stat-value">{{ totalUsers }}</div>
+    </div>
+    <div class="stat-card success">
+      <div class="stat-title">Hommes</div>
+      <div class="stat-value">{{ totalMen }}</div>
+    </div>
+    <div class="stat-card warn">
+      <div class="stat-title">Femmes</div>
+      <div class="stat-value">{{ totalWomen }}</div>
+    </div>
+  </div>
+
+</div>
+
 <div class="employees-list-container">
-  <h2>Liste des employés</h2>
-  <table class="employees-table">
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Email</th>
-        <th>Poste</th>
-        <th>Date d'embauche</th>
-        <th>Statut</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let employee of employees">
-        <td>{{ employee.lastName }}</td>
-        <td>{{ employee.firstName }}</td>
-        <td>{{ employee.email }}</td>
-        <td>{{ employee.jobTitle || '-' }}</td>
-        <td>{{ employee.hireDate || '-' }}</td>
-        <td>
-          <span [class.active]="employee.isActive"
-            [class.inactive]="!employee.isActive">
-            {{ employee.isActive ? 'Actif' : 'Inactif' }}
-          </span>
-        </td>
-        <td>
-          <button class="edit-btn">Modifier</button>
-          <!-- ... -->
-          <button class="edit-btn"
-            (click)="onEdit(employee.id)">Modifier</button>
-          <!-- ... -->
-          <button class="delete-btn">Supprimer</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <button class="add-btn" (click)="onAdd()">Ajouter un employé</button>
+  <!-- <div class="list-toolbar">
+    <input type="text" [(ngModel)]="searchTerm"
+      placeholder="Rechercher (nom, prénom, email, poste)" />
+    <div class="pager">
+      <button class="pager-btn" [disabled]="pageIndex === 1"
+        (click)="pageIndex = 1">⏮</button>
+      <button class="pager-btn" [disabled]="pageIndex === 1"
+        (click)="pageIndex = pageIndex - 1">‹</button>
+      <span class="page-info">Page {{ pageIndex }} / {{ totalPages }}</span>
+      <button class="pager-btn" [disabled]="pageIndex === totalPages"
+        (click)="pageIndex = pageIndex + 1">›</button>
+      <button class="pager-btn" [disabled]="pageIndex === totalPages"
+        (click)="pageIndex = totalPages">⏭</button>
+      <select [(ngModel)]="pageSize" class="page-size">
+        <option [ngValue]="5">5</option>
+        <option [ngValue]="10">10</option>
+        <option [ngValue]="20">20</option>
+        <option [ngValue]="50">50</option>
+      </select>
+    </div>
+  </div> -->
+  <div class="table-header">
+    <h2>Liste des employés</h2>
+    <div class="actions">
+      <button class="add-btn" (click)="onAdd()">Ajouter un employé</button>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <table class="employees-table"
+      *ngIf="!loading && !error && pagedEmployees.length > 0">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Poste</th>
+          <th>Date d'embauche</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of pagedEmployees">
+          <td>{{ employee.lastName }}</td>
+          <td>{{ employee.firstName }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.jobTitle || '-' }}</td>
+          <td>{{ employee.hireDate || '-' }}</td>
+          <td>
+            <span [class.active]="employee.isActive"
+              [class.inactive]="!employee.isActive">
+              {{ employee.isActive ? 'Actif' : 'Inactif' }}
+            </span>
+          </td>
+          <td>
+            <button class="edit-btn"
+              (click)="onEdit(employee.id)">Modifier</button>
+            <button class="delete-btn"
+              (click)="onDelete(employee.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!loading && !error && pagedEmployees.length === 0"
+      class="empty">
+      Aucune donnée trouvée.
+    </div>
+  </div>
 </div>

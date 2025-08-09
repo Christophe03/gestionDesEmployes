@@ -9,11 +9,11 @@
 
 .employee-form {
   background: #fff;
-  padding: 2.5rem 2rem;
+  padding: 2rem 1.5rem;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(10, 35, 66, 0.15);
+  box-shadow: 0 12px 32px rgba(10, 35, 66, 0.12);
   width: 100%;
-  max-width: 400px;
+  max-width: 520px;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -39,7 +39,8 @@
 
 .employee-form input[type="text"],
 .employee-form input[type="email"],
-.employee-form input[type="date"] {
+.employee-form input[type="date"],
+.employee-form select {
   padding: 0.7rem;
   border: 1px solid #b0c4de;
   border-radius: 8px;
@@ -67,4 +68,9 @@
 
 .employee-form button:hover {
   background: #274472;
+}
+
+@media (max-width: 600px) {
+  .employee-form-container { padding: 1rem; }
+  .employee-form { max-width: 100%; padding: 1.25rem 1rem; }
 }

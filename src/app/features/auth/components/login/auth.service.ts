@@ -1,27 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
+
+interface LoginResponse {
+  accessToken: string;
+  expiresIn: number; // seconds
+}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private isLoggedIn = false;
+  private api = 'http://localhost:3000/auth';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
-  login(email: string, password: string): boolean {
-    // Login de test
-    if (email === 'test@test.com' && password === 'test123') {
-      this.isLoggedIn = true;
-      return true;
-    }
-    return false;
+  login(email: string, password: string) {
+    return this.http
+      .post<LoginResponse>(`${this.api}/login`, { email, password })
+      .pipe(
+        tap((res) => {
+          localStorage.setItem('accessToken', res.accessToken);
+          localStorage.setItem('expiresAt', String(Date.now() + res.expiresIn * 1000));
+        })
+      );
   }
 
   logout() {
-    this.isLoggedIn = false;
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('expiresAt');
     this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {
-    return this.isLoggedIn;
+    const token = localStorage.getItem('accessToken');
+    const exp = Number(localStorage.getItem('expiresAt'));
+    return Boolean(token && exp && Date.now() < exp);
   }
 }

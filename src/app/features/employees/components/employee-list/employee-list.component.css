@@ -1,15 +1,125 @@
 /* employees-list.component.scss */
+.hero-header {
+  padding: 1.2rem 2rem 1rem;
+  background: linear-gradient(135deg, #0a2342 0%, #1e3d6b 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-title h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.subtitle {
+  opacity: 0.9;
+  font-size: 0.92rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 10px;
+  padding: 0.35rem 0.45rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.icon-btn .material-icons {
+  color: #fff;
+  font-size: 20px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.profile .material-icons {
+  color: #fff;
+}
+
+.profile .user-email {
+  font-weight: 700;
+}
+
 .employees-list-container {
   padding: 2rem;
   background: #f4f8fb;
   min-height: 100vh;
 }
 
-h2 {
-  color: #0a2342;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
+
+.table-header h2 {
+  color: #0a2342;
+  font-weight: 700;
+  margin: 0.5rem 0 0;
+}
+
+.dashboard-header {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 6px 18px rgba(10, 35, 66, 0.08);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeInUp 420ms ease forwards;
+}
+.dashboard-header .stat-card:nth-child(1) { animation-delay: 60ms; }
+.dashboard-header .stat-card:nth-child(2) { animation-delay: 140ms; }
+.dashboard-header .stat-card:nth-child(3) { animation-delay: 220ms; }
+.dashboard-header .stat-card:nth-child(4) { animation-delay: 300ms; }
+
+.stat-title {
+  font-size: 0.9rem;
+  color: #5a6b7b;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  color: #0a2342;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.stat-card.primary { border-left: 5px solid #0a2342; }
+.stat-card.accent { border-left: 5px solid #7c4dff; }
+.stat-card.success { border-left: 5px solid #2e7d32; }
+.stat-card.warn { border-left: 5px solid #ef6c00; }
 
 .employees-table {
   width: 100%;
@@ -19,6 +129,7 @@ h2 {
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(10, 35, 66, 0.08);
   margin-bottom: 2rem;
+  animation: fadeIn 480ms ease both 160ms;
 }
 
 .employees-table th,
@@ -36,6 +147,34 @@ h2 {
 .employees-table tr:nth-child(even) {
   background: #e9f0fa;
 }
+
+.employees-table tbody tr {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: fadeInUp 360ms ease forwards;
+}
+.employees-table tbody tr:nth-child(1) { animation-delay: 80ms; }
+.employees-table tbody tr:nth-child(2) { animation-delay: 120ms; }
+.employees-table tbody tr:nth-child(3) { animation-delay: 160ms; }
+.employees-table tbody tr:nth-child(4) { animation-delay: 200ms; }
+.employees-table tbody tr:nth-child(5) { animation-delay: 240ms; }
+.employees-table tbody tr:nth-child(6) { animation-delay: 280ms; }
+.employees-table tbody tr:nth-child(7) { animation-delay: 320ms; }
+.employees-table tbody tr:nth-child(8) { animation-delay: 360ms; }
+.employees-table tbody tr:nth-child(9) { animation-delay: 400ms; }
+.employees-table tbody tr:nth-child(10) { animation-delay: 440ms; }
+
+.loading, .empty, .error {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 4px 16px rgba(10, 35, 66, 0.08);
+  margin-bottom: 1rem;
+  animation: fadeIn 300ms ease both;
+}
+.error { border-left: 4px solid #f44336; }
+.empty { border-left: 4px solid #b0bec5; }
+.loading { border-left: 4px solid #2196f3; }
 
 .active {
   color: #2196f3;
@@ -80,10 +219,38 @@ h2 {
 .add-btn {
   background: #0a2342;
   color: #fff;
-  margin-top: 1rem;
-  font-size: 1rem;
+  margin-top: 0;
+  font-size: 0.95rem;
 }
 
 .add-btn:hover {
   background: #274472;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-header { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .dashboard-header { grid-template-columns: 1fr; }
+  .employees-table th:nth-child(4),
+  .employees-table td:nth-child(4),
+  .employees-table th:nth-child(5),
+  .employees-table td:nth-child(5) {
+    display: none;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }

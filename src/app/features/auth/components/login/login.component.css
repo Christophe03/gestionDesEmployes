@@ -9,14 +9,15 @@
 
 .login-form {
   background: #fff;
-  padding: 2.5rem 2rem;
+  padding: 2rem 1.5rem;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(10, 35, 66, 0.15);
+  box-shadow: 0 12px 32px rgba(10, 35, 66, 0.12);
   width: 100%;
   max-width: 350px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  animation: fadeInUp 460ms ease both;
 }
 
 .login-form h2 {
@@ -64,4 +65,9 @@
 
 .login-form button:hover {
   background: #274472;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }

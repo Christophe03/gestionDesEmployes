@@ -1,31 +1,34 @@
 import { Component } from '@angular/core';
+// Not standalone. Imported via AuthModule
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { FormsModule, NgForm } from '@angular/forms';
-import { CommonModule, NgIf } from '@angular/common';
-
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [
-    FormsModule, CommonModule
-  ],
+  // not standalone
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   email = '';
   password = '';
-  error = '';
+  loading = false;
+  error?: string;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
-  onSubmit() {
-    if (this.authService.login(this.email, this.password)) {
-      this.router.navigate(['/employees']); // Redirection après connexion
-    } else {
-      this.error = 'Identifiants invalides';
-    }
+  submit() {
+    this.error = undefined;
+    this.loading = true;
+    this.auth.login(this.email, this.password).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/employees']);
+      },
+      error: (err) => {
+        this.loading = false;
+        this.error = err?.error?.message || 'Identifiants invalides';
+      }
+    });
   }
 }

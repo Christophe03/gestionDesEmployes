@@ -1,7 +1,9 @@
 <!-- employee-add.component.html -->
 <div class="employee-form-container">
+  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
   <form class="employee-form" (ngSubmit)="onSubmit()" #form="ngForm">
     <h2>Ajouter un employé</h2>
+    <div class="error" *ngIf="error">{{ error }}</div>
 
     <div class="form-group">
       <label for="lastName">Nom</label>
@@ -34,6 +36,15 @@
     </div>
 
     <div class="form-group">
+      <label for="gender">Genre</label>
+      <select id="gender" name="gender" [(ngModel)]="employee.gender" required>
+        <option [ngValue]="undefined">-- Sélectionner --</option>
+        <option [ngValue]="'Masculin'">Masculin</option>
+        <option [ngValue]="'Feminin'">Feminin</option>
+      </select>
+    </div>
+
+    <div class="form-group">
       <label>
         <input type="checkbox" name="isActive"
           [(ngModel)]="employee.isActive" />
@@ -41,6 +52,7 @@
       </label>
     </div>
 
-    <button type="submit">Ajouter</button>
+    <button type="submit" [disabled]="loading">{{ loading ? 'Ajout...' :
+      'Ajouter' }}</button>
   </form>
 </div>
