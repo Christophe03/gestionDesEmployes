@@ -1,0 +1,41 @@
+<!-- employees-list.component.html -->
+<div class="employees-list-container">
+  <h2>Liste des employés</h2>
+  <table class="employees-table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Poste</th>
+        <th>Date d'embauche</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.lastName }}</td>
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.jobTitle || '-' }}</td>
+        <td>{{ employee.hireDate || '-' }}</td>
+        <td>
+          <span [class.active]="employee.isActive"
+            [class.inactive]="!employee.isActive">
+            {{ employee.isActive ? 'Actif' : 'Inactif' }}
+          </span>
+        </td>
+        <td>
+          <button class="edit-btn">Modifier</button>
+          <!-- ... -->
+          <button class="edit-btn"
+            (click)="onEdit(employee.id)">Modifier</button>
+          <!-- ... -->
+          <button class="delete-btn">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="add-btn" (click)="onAdd()">Ajouter un employé</button>
+</div>

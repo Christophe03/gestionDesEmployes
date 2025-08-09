@@ -1,0 +1,46 @@
+<!-- employee-edit.component.html -->
+<div class="employee-form-container">
+  <form class="employee-form" (ngSubmit)="onSubmit()" #form="ngForm">
+    <h2>Modifier un employé</h2>
+
+    <div class="form-group">
+      <label for="lastName">Nom</label>
+      <input type="text" id="lastName" name="lastName"
+        [(ngModel)]="employee.lastName" required />
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">Prénom</label>
+      <input type="text" id="firstName" name="firstName"
+        [(ngModel)]="employee.firstName" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="employee.email"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label for="jobTitle">Poste</label>
+      <input type="text" id="jobTitle" name="jobTitle"
+        [(ngModel)]="employee.jobTitle" />
+    </div>
+
+    <div class="form-group">
+      <label for="hireDate">Date d'embauche</label>
+      <input type="date" id="hireDate" name="hireDate"
+        [(ngModel)]="employee.hireDate" />
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input type="checkbox" name="isActive"
+          [(ngModel)]="employee.isActive" />
+        Actif
+      </label>
+    </div>
+
+    <button type="submit">Enregistrer</button>
+  </form>
+</div>

@@ -1,0 +1,89 @@
+/* employees-list.component.scss */
+.employees-list-container {
+  padding: 2rem;
+  background: #f4f8fb;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #0a2342;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.employees-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(10, 35, 66, 0.08);
+  margin-bottom: 2rem;
+}
+
+.employees-table th,
+.employees-table td {
+  padding: 1rem;
+  text-align: left;
+}
+
+.employees-table th {
+  background: #0a2342;
+  color: #fff;
+  font-weight: 600;
+}
+
+.employees-table tr:nth-child(even) {
+  background: #e9f0fa;
+}
+
+.active {
+  color: #2196f3;
+  font-weight: 600;
+}
+
+.inactive {
+  color: #b0b0b0;
+  font-weight: 600;
+}
+
+.edit-btn,
+.delete-btn,
+.add-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.edit-btn {
+  background: #2196f3;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background: #1769aa;
+}
+
+.delete-btn {
+  background: #f44336;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background: #b71c1c;
+}
+
+.add-btn {
+  background: #0a2342;
+  color: #fff;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.add-btn:hover {
+  background: #274472;
+}

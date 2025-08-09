@@ -1,0 +1,70 @@
+/* employee-form.component.scss */
+.employee-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: linear-gradient(135deg, #0a2342 0%, #274472 100%);
+}
+
+.employee-form {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(10, 35, 66, 0.15);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.employee-form h2 {
+  color: #0a2342;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.employee-form label {
+  color: #274472;
+  font-weight: 500;
+}
+
+.employee-form input[type="text"],
+.employee-form input[type="email"],
+.employee-form input[type="date"] {
+  padding: 0.7rem;
+  border: 1px solid #b0c4de;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.employee-form input:focus {
+  border-color: #0a2342;
+  outline: none;
+}
+
+.employee-form button {
+  background: #0a2342;
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+
+.employee-form button:hover {
+  background: #274472;
+}
